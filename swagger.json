@@ -1,0 +1,1120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a simple API",
+    "version": "1.0.0",
+    "title": "RefonteLogiciel"
+  },
+  "securityDefinitions": {
+    "AuthTokenKey": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Auth-Token"
+    }
+  },
+  "tags": [
+    {
+      "name": "AuthToken",
+      "description": "AuthToken controller"
+    }
+  ],
+  "paths": {
+    "/auth-tokens": {
+      "post": {
+        "tags": [
+          "AuthToken"
+        ],
+        "summary": "Generate authentication token",
+        "operationId": "postAuthToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Credentials",
+            "description": "Credentials of the user to log in",
+            "schema": {
+              "$ref": "#/definitions/Credentials"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Token information",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Form Error",
+            "schema": {
+              "$ref": "#/definitions/FormError"
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "schema": {
+              "$ref": "#/definitions/InvalidCredentialsError"
+            }
+          }
+        }
+      }
+    },
+    "/auth-token/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Authentication token"
+        }
+      ],
+      "delete": {
+        "security": [
+          {
+            "AuthTokenKey": []
+          }
+        ],
+        "tags": [
+          "AuthToken"
+        ],
+        "summary": "Delete authentication token",
+        "operationId": "deleteAuthToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete successful"
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "schema": {
+              "$ref": "#/definitions/InvalidAuthTokenError"
+            }
+          }
+        }
+      }
+    },
+    "/servings/summary": {
+      "parameters": [
+        {
+          "in": "query",
+          "name": "date",
+          "type": "string",
+          "required": false,
+          "description": "Date to get the servings from (YYYY-MM-DD)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Serving"
+        ],
+        "summary": "Returns a summary of servings",
+        "operationId": "getServingsSummary",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of servings details",
+            "schema": {
+              "$ref": "#/definitions/ServingsSummary"
+            }
+          }
+        }
+      }
+    },
+    "/events/summary": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Returns a summary of upcoming events",
+        "operationId": "getEventsSummary",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of events details",
+            "schema": {
+              "$ref": "#/definitions/EventsSummary"
+            }
+          }
+        }
+      }
+    },
+    "/servings/current": {
+      "get": {
+        "tags": [
+          "Serving"
+        ],
+        "summary": "Returns the current serving",
+        "operationId": "getCurrentServing",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A serving moment and ID",
+            "schema": {
+              "$ref": "#/definitions/Serving"
+            }
+          }
+        }
+      }
+    },
+    "/serving/{date}/{moment}/bookings": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "date",
+          "type": "string",
+          "required": true,
+          "description": "Desired date"
+        },
+        {
+          "in": "path",
+          "name": "moment",
+          "type": "string",
+          "required": true,
+          "description": "Desired moment"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Serving"
+        ],
+        "summary": "Returns a list of bookings for a given date and moment",
+        "operationId": "getBookingsByDateAndMoment",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of bookings",
+            "schema": {
+              "$ref": "#/definitions/Bookings"
+            }
+          }
+        }
+      }
+    },
+    "/booking/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Returns the details of the booking",
+        "operationId": "getBookingDetails",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A booking's details",
+            "schema": {
+              "$ref": "#/definitions/BookingDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Update a booking's details",
+        "operationId": "putUpdateBooking",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Booking",
+            "description": "The updated booking details",
+            "schema": {
+              "$ref": "#/definitions/BookingDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking",
+            "schema": {
+              "$ref": "#/definitions/BookingDetails"
+            }
+          },
+          "400": {
+            "description": "Form Error",
+            "schema": {
+              "$ref": "#/definitions/FormError"
+            }
+          }
+        }
+      }
+    },
+    "/booking/{id}/enqueue": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "BookingQueue",
+            "description": "The updated booking queue order",
+            "schema": {
+              "$ref": "#/definitions/BookingQueue"
+            }
+          }
+        ],
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Enqueue the booking with the given ID",
+        "operationId": "postBookingEnqueue",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The booking's queue order",
+            "schema": {
+              "$ref": "#/definitions/BookingQueue"
+            }
+          }
+        }
+      }
+    },
+    "/booking": {
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Booking",
+            "description": "The booking to create",
+            "schema": {
+              "$ref": "#/definitions/Booking"
+            }
+          }
+        ],
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Create the booking with the given values",
+        "operationId": "postBookingCreate",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The created booking",
+            "schema": {
+              "$ref": "#/definitions/Booking"
+            }
+          }
+        }
+      }
+    },
+    "/booking/{id}/tables/free": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Initials",
+            "description": "The booking to create",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "initials": {
+                  "type": "string",
+                  "example": "jd"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Free the tables of the booking with the given ID",
+        "operationId": "postBookingFreeTables",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking's tables are free"
+          }
+        }
+      }
+    },
+    "/booking/{id}/arrive": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Free the tables of the booking with the given ID",
+        "operationId": "postBookingArrive",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking's client arrived"
+          },
+          "400": {
+            "description": "The booking is not confirmed (status IS NOT empty)"
+          },
+          "404": {
+            "description": "No booking exists with the given ID"
+          }
+        }
+      }
+    },
+    "/room/{id}/{date}/{moment}/tables": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Room ID"
+        },
+        {
+          "in": "path",
+          "name": "date",
+          "type": "string",
+          "required": true,
+          "description": "Date"
+        },
+        {
+          "in": "path",
+          "name": "moment",
+          "type": "string",
+          "required": true,
+          "description": "Room ID"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "Get the tables of the given room for the given date",
+        "operationId": "getRoomTables",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The room's tables",
+            "schema": {
+              "$ref": "#/definitions/RoomTables"
+            }
+          },
+          "404": {
+            "description": "The room doesn't exist"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Credentials": {
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "Acelys"
+        },
+        "password": {
+          "type": "string",
+          "example": "password"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "Acelys"
+        },
+        "token": {
+          "type": "string",
+          "example": "t6EiTSIHS9i4lRdXIkmMNXdQk+xQL11jWAnOUYf3DnBMTo6ZTLi9ST6gcIoy3jiyNZQ="
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "ROLE_API"
+          }
+        }
+      }
+    },
+    "FormError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 400
+        },
+        "message": {
+          "type": "string",
+          "example": "Validation failed"
+        }
+      }
+    },
+    "InvalidCredentialsError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 401
+        },
+        "message": {
+          "type": "string",
+          "example": "Identifiants invalides."
+        }
+      }
+    },
+    "InvalidAuthTokenError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 401
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid authentication token"
+        }
+      }
+    },
+    "ServingsSummary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2019-02-12T00:00:00+01:00"
+          },
+          "moment": {
+            "type": "object",
+            "properties": {
+              "noon": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "first_part": {
+                    "type": "integer",
+                    "example": 53
+                  },
+                  "second_part": {
+                    "type": "integer",
+                    "example": 62
+                  },
+                  "total": {
+                    "type": "integer",
+                    "example": 115
+                  },
+                  "bus_pax": {
+                    "type": "integer",
+                    "example": 25
+                  },
+                  "bus_count": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              },
+              "evening": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 2
+                  },
+                  "first_part": {
+                    "type": "integer",
+                    "example": 53
+                  },
+                  "second_part": {
+                    "type": "integer",
+                    "example": 62
+                  },
+                  "total": {
+                    "type": "integer",
+                    "example": 115
+                  },
+                  "bus_pax": {
+                    "type": "integer",
+                    "example": 25
+                  },
+                  "bus_count": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Serving": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "moment": {
+          "type": "string",
+          "example": "noon"
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "1970-01-01T11:30:00+01:00",
+            "1970-01-01T11:45:00+01:00"
+          ]
+        }
+      }
+    },
+    "EventsSummary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Midi 1er janvier 2020"
+          },
+          "date": {
+            "type": "string",
+            "example": "2020-01-01T00:00:00+01:00"
+          },
+          "moment": {
+            "type": "string",
+            "example": "midi"
+          },
+          "first_part": {
+            "type": "integer",
+            "example": 87
+          },
+          "second_part": {
+            "type": "integer",
+            "example": 41
+          },
+          "total": {
+            "type": "integer",
+            "example": 128
+          },
+          "bus_pax": {
+            "type": "integer",
+            "example": 59
+          },
+          "bus_count": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      }
+    },
+    "Bookings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "been_there": {
+            "type": "integer",
+            "example": 5
+          },
+          "waiting_list_order": {
+            "type": "string",
+            "example": "a"
+          },
+          "is_late": {
+            "type": "boolean",
+            "example": false
+          },
+          "is_new_client": {
+            "type": "boolean",
+            "example": true
+          },
+          "is_seated": {
+            "type": "boolean",
+            "example": false
+          },
+          "is_second_serve": {
+            "type": "boolean",
+            "example": true
+          },
+          "gender": {
+            "type": "string",
+            "example": "Mme"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "firstname": {
+            "type": "string",
+            "example": "Jane"
+          },
+          "is_table_free": {
+            "type": "boolean",
+            "example": true
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              401,
+              402,
+              403
+            ]
+          },
+          "pax_count": {
+            "type": "integer",
+            "example": 8
+          },
+          "info": {
+            "type": "string",
+            "example": "Coucou"
+          },
+          "birthday": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              7,
+              40
+            ]
+          },
+          "children": {
+            "type": "integer",
+            "example": 2
+          },
+          "wheelchair": {
+            "type": "integer",
+            "example": 1
+          },
+          "prefer_second_serve": {
+            "type": "string",
+            "example": "inside"
+          },
+          "waiter": {
+            "type": "string",
+            "example": "Michel"
+          },
+          "booking_time": {
+            "type": "string",
+            "example": "2019-02-14T12:00:00+01:00"
+          },
+          "phone_number": {
+            "type": "string",
+            "example": "0123456789"
+          },
+          "source": {
+            "type": "string",
+            "example": "mobile"
+          },
+          "initials": {
+            "type": "string",
+            "example": "AA"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2019-02-10T12:00:00+01:00"
+          }
+        }
+      }
+    },
+    "BookingDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "lastname": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "firstname": {
+          "type": "string",
+          "example": "Jane"
+        },
+        "phone_number": {
+          "type": "string",
+          "example": "0123456789"
+        },
+        "email": {
+          "type": "string",
+          "example": "jane.doe@example.org"
+        },
+        "zipcode": {
+          "type": "string",
+          "example": "34000"
+        },
+        "city": {
+          "type": "string",
+          "example": "Montpellier"
+        },
+        "is_vip": {
+          "type": "boolean",
+          "example": true
+        },
+        "comment": {
+          "type": "string",
+          "example": "A dragué la serveuse"
+        },
+        "initials": {
+          "type": "string",
+          "example": "AA"
+        },
+        "history": {
+          "type": "string",
+          "example": "jd[5|76+45],jd[4|87]"
+        },
+        "been_there": {
+          "type": "integer",
+          "example": 5
+        },
+        "previous_visit": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 2
+            },
+            "date": {
+              "type": "string",
+              "example": "2019-02-01T12:00:00+01:00"
+            },
+            "moment": {
+              "type": "string",
+              "example": "midi"
+            },
+            "waiter": {
+              "type": "string",
+              "example": "Michel"
+            },
+            "wine": {
+              "type": "string",
+              "example": "Beaujolais Nouveau"
+            }
+          }
+        },
+        "birthday": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "example": [
+            7,
+            40
+          ]
+        },
+        "children": {
+          "type": "integer",
+          "example": 2
+        },
+        "wheelchair": {
+          "type": "integer",
+          "example": 1
+        },
+        "stroller": {
+          "type": "integer",
+          "example": 0
+        },
+        "is_incomplete": {
+          "type": "boolean",
+          "example": false
+        },
+        "info": {
+          "type": "string",
+          "example": "Coucou"
+        },
+        "pax_count": {
+          "type": "integer",
+          "example": 5
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "example": [
+            401,
+            402,
+            403
+          ]
+        },
+        "room": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "name": {
+              "type": "string",
+              "example": "Salle Clape"
+            }
+          }
+        },
+        "booking_time": {
+          "type": "string",
+          "example": "2019-02-14T12:00:00+01:00"
+        },
+        "anticipated_release_hour": {
+          "type": "string",
+          "example": "1970-01-01T13:30:00+01:00"
+        }
+      }
+    },
+    "BookingQueue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "comment": {
+          "type": "string",
+          "example": "Coucou"
+        },
+        "option": {
+          "type": "string",
+          "example": "Pub"
+        },
+        "queue": {
+          "type": "integer",
+          "example": 1
+        },
+        "initials": {
+          "type": "string",
+          "example": "jd"
+        }
+      }
+    },
+    "Booking": {
+      "type": "object",
+      "properties": {
+        "gender": {
+          "type": "string",
+          "example": "M."
+        },
+        "name": {
+          "type": "string",
+          "example": "John Doe"
+        },
+        "phone_number": {
+          "type": "string",
+          "example": "0102030405"
+        },
+        "note": {
+          "type": "string",
+          "example": "Ceci est une note"
+        },
+        "option": {
+          "type": "string",
+          "example": "Terrasse"
+        },
+        "pax_count": {
+          "type": "integer",
+          "example": 5
+        },
+        "booking_time": {
+          "type": "string",
+          "example": "2019-02-01T11:45:00+01:00"
+        },
+        "date": {
+          "type": "string",
+          "example": "2019-02-01T12:00:00+01:00"
+        },
+        "moment": {
+          "type": "string",
+          "example": "noon"
+        },
+        "is_vip": {
+          "type": "boolean",
+          "example": false
+        },
+        "is_new_client": {
+          "type": "boolean",
+          "example": true
+        },
+        "is_incomplete": {
+          "type": "boolean",
+          "example": false
+        },
+        "children": {
+          "type": "integer",
+          "example": 1
+        },
+        "wheelchair": {
+          "type": "integer",
+          "example": 0
+        },
+        "stroller": {
+          "type": "integer",
+          "example": 0
+        },
+        "birthday": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "example": [
+            14,
+            75
+          ]
+        },
+        "initials": {
+          "type": "string",
+          "example": "mf"
+        },
+        "queue": {
+          "type": "integer",
+          "example": 0
+        }
+      }
+    },
+    "RoomTables": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Salle Clape"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer",
+                "example": 25
+              },
+              "position": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "integer",
+                    "example": 452
+                  },
+                  "y": {
+                    "type": "integer",
+                    "example": 75
+                  },
+                  "rotation": {
+                    "type": "integer",
+                    "example": -90
+                  }
+                }
+              },
+              "layout": {
+                "type": "object",
+                "properties": {
+                  "template": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "capacity": {
+                    "type": "integer",
+                    "example": 2
+                  },
+                  "render": {
+                    "type": "string",
+                    "example": "{ \"blablabla\": \"coucou\" }"
+                  }
+                }
+              },
+              "is_security": {
+                "type": "boolean",
+                "example": false
+              },
+              "is_anticipated_release": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
