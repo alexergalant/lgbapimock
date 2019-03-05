@@ -439,7 +439,7 @@
           "name": "moment",
           "type": "string",
           "required": true,
-          "description": "Room ID"
+          "description": "moment"
         }
       ],
       "get": {
@@ -770,6 +770,10 @@
             "type": "integer",
             "example": 1
           },
+          "stroller": {
+            "type": "integer",
+            "example": 0
+          },
           "prefer_second_serve": {
             "type": "string",
             "example": "inside"
@@ -793,6 +797,10 @@
           "initials": {
             "type": "string",
             "example": "AA"
+          },
+          "is_incomplete": {
+            "type": "boolean",
+            "example": false
           },
           "created_at": {
             "type": "string",
@@ -838,7 +846,7 @@
         },
         "comment": {
           "type": "string",
-          "example": "A dragué la serveuse"
+          "example": "A draguĂ© la serveuse"
         },
         "initials": {
           "type": "string",
@@ -1021,6 +1029,18 @@
           "type": "boolean",
           "example": false
         },
+        "is_anticipated_release": {
+          "type": "boolean",
+          "example": false
+        },
+        "is_unmovable": {
+          "type": "boolean",
+          "example": true
+        },
+        "is_bus_or_group": {
+          "type": "boolean",
+          "example": false
+        },
         "children": {
           "type": "integer",
           "example": 1
@@ -1047,9 +1067,74 @@
           "type": "string",
           "example": "mf"
         },
+        "status": {
+          "type": "string",
+          "example": "done"
+        },
+        "actual_arrival_time": {
+          "type": "string",
+          "example": "2019-01-05T15:25:00+01:00"
+        },
         "queue": {
           "type": "integer",
           "example": 0
+        }
+      }
+    },
+    "Table": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "example": 25
+        },
+        "position": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "integer",
+              "example": 452
+            },
+            "y": {
+              "type": "integer",
+              "example": 75
+            },
+            "rotation": {
+              "type": "integer",
+              "example": -90
+            }
+          }
+        },
+        "layout": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "type": "integer",
+              "example": 1
+            },
+            "capacity": {
+              "type": "integer",
+              "example": 2
+            },
+            "render": {
+              "type": "string",
+              "example": "{ \"blablabla\": \"coucou\" }"
+            }
+          }
+        },
+        "is_security": {
+          "type": "boolean",
+          "example": false
+        },
+        "is_anticipated_release": {
+          "type": "boolean",
+          "example": true
+        },
+        "bookings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Booking"
+          }
         }
       }
     },
@@ -1063,55 +1148,7 @@
         "tables": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "number": {
-                "type": "integer",
-                "example": 25
-              },
-              "position": {
-                "type": "object",
-                "properties": {
-                  "x": {
-                    "type": "integer",
-                    "example": 452
-                  },
-                  "y": {
-                    "type": "integer",
-                    "example": 75
-                  },
-                  "rotation": {
-                    "type": "integer",
-                    "example": -90
-                  }
-                }
-              },
-              "layout": {
-                "type": "object",
-                "properties": {
-                  "template": {
-                    "type": "integer",
-                    "example": 1
-                  },
-                  "capacity": {
-                    "type": "integer",
-                    "example": 2
-                  },
-                  "render": {
-                    "type": "string",
-                    "example": "{ \"blablabla\": \"coucou\" }"
-                  }
-                }
-              },
-              "is_security": {
-                "type": "boolean",
-                "example": false
-              },
-              "is_anticipated_release": {
-                "type": "boolean",
-                "example": true
-              }
-            }
+            "$ref": "#/definitions/Table"
           }
         }
       }
