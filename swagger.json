@@ -911,6 +911,10 @@
           "type": "boolean",
           "example": false
         },
+        "is_client": {
+          "type": "boolean",
+          "example": true
+        },
         "info": {
           "type": "string",
           "example": "Coucou"
