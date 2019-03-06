@@ -418,7 +418,7 @@
         }
       }
     },
-    "/room/{id}/{date}/{moment}/tables": {
+    "/room/{id}/{date}/{moment}": {
       "parameters": [
         {
           "in": "path",
