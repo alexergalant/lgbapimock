@@ -1135,9 +1135,14 @@
           "example": true
         },
         "bookings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Booking"
+          "type": "object",
+          "properties": {
+            "first_serve": {
+              "$ref": "#/definitions/Booking"
+            },
+            "second_serve": {
+              "$ref": "#/definitions/Booking"
+            }
           }
         }
       }
