@@ -846,7 +846,7 @@
         },
         "comment": {
           "type": "string",
-          "example": "A draguĂ© la serveuse"
+          "example": "A dragué la serveuse"
         },
         "initials": {
           "type": "string",
@@ -1147,6 +1147,27 @@
         }
       }
     },
+    "Square": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "example": "Carré des 20"
+        },
+        "booked": {
+          "type": "integer",
+          "example": 15
+        },
+        "seated": {
+          "type": "integer",
+          "example": 6
+        },
+        "gone": {
+          "type": "integer",
+          "example": 4
+        }
+      }
+    },
     "RoomTables": {
       "type": "object",
       "properties": {
@@ -1158,6 +1179,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Table"
+          }
+        },
+        "squares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Square"
           }
         }
       }
