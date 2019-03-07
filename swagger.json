@@ -386,6 +386,60 @@
         }
       }
     },
+    "/booking/{id}/tables": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tables",
+            "description": "The booking to create",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tables": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "example": [
+                    57,
+                    78
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Assign the tables to the booking with the given ID",
+        "operationId": "postBookingAssignTables",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking's tables are assigned"
+          },
+          "400": {
+            "description": "One of the tables is already booked or blocked"
+          },
+          "404": {
+            "description": "The booking doesn't exist"
+          }
+        }
+      }
+    },
     "/booking/{id}/arrive": {
       "parameters": [
         {
