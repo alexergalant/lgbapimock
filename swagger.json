@@ -517,6 +517,118 @@
           }
         }
       }
+    },
+    "/table/{number}/block": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "number",
+          "type": "integer",
+          "required": true,
+          "description": "The table's number"
+        }
+      ],
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Action",
+            "description": "The data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "example": "2019-08-08T12:45:00+01:00"
+                },
+                "moment": {
+                  "type": "string",
+                  "example": "noon"
+                },
+                "serve_part": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ],
+        "summary": "Block the given table for the date / moment / part",
+        "operationId": "postTableBlock",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The table is blocked"
+          },
+          "400": {
+            "description": "The table is already booked or blocked for this serving/part"
+          },
+          "404": {
+            "description": "The table doesn't exist"
+          }
+        }
+      }
+    },
+    "/table/{number}/unblock": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "number",
+          "type": "integer",
+          "required": true,
+          "description": "The table's number"
+        }
+      ],
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Action",
+            "description": "The data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "example": "2019-08-08T12:45:00+01:00"
+                },
+                "moment": {
+                  "type": "string",
+                  "example": "noon"
+                },
+                "serve_part": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ],
+        "summary": "Unblock the given table for the date / moment / part",
+        "operationId": "postTableUnblock",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The table is unblocked"
+          },
+          "400": {
+            "description": "The table is not blocked for this serving/part"
+          },
+          "404": {
+            "description": "The table doesn't exist"
+          }
+        }
+      }
     }
   },
   "definitions": {
