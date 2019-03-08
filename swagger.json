@@ -629,6 +629,35 @@
           }
         }
       }
+    },
+    "/booking/{id}/leave": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Sets the booking's status to \"done\"",
+        "operationId": "postBookingLeave",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking's done"
+          },
+          "404": {
+            "description": "No booking exists with the given ID"
+          }
+        }
+      }
     }
   },
   "definitions": {
