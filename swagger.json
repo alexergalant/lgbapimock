@@ -658,6 +658,62 @@
           }
         }
       }
+    },
+    "/booking/{id}/cancel": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "The booking's ID"
+        }
+      ],
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Action",
+            "description": "The data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "initials": {
+                  "type": "string",
+                  "example": "JB"
+                },
+                "reason": {
+                  "type": "string",
+                  "example": "Sa voiture est tombée en panne"
+                },
+                "no_charge": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Cancels the given booking",
+        "operationId": "postBookingCancel",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking is canceled"
+          },
+          "400": {
+            "description": "The data is incorrect"
+          },
+          "404": {
+            "description": "The booking doesn't exist"
+          }
+        }
+      }
     }
   },
   "definitions": {
