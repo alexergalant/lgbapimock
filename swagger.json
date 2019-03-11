@@ -684,6 +684,10 @@
                 },
                 "reason": {
                   "type": "string",
+                  "example": "Autre (précisez)"
+                },
+                "comment": {
+                  "type": "string",
                   "example": "Sa voiture est tombée en panne"
                 },
                 "no_charge": {
