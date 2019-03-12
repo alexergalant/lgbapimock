@@ -1399,6 +1399,19 @@
               "$ref": "#/definitions/Booking"
             }
           }
+        },
+        "blockings": {
+          "type": "object",
+          "properties": {
+            "first_serve": {
+              "type": "boolean",
+              "example": true
+            },
+            "second_serve": {
+              "type": "boolean",
+              "example": false
+            }
+          }
         }
       }
     },
