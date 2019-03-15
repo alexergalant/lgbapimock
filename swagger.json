@@ -623,6 +623,48 @@
         }
       }
     },
+    "/tables/block": {
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tables",
+            "description": "The tables' number to block",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tables": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "example": [
+                    57,
+                    78
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ],
+        "summary": "Blocks the given tables",
+        "operationId": "postBlockTables",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The tables are blocked"
+          },
+          "400": {
+            "description": "One of the tables is already booked or blocked"
+          }
+        }
+      }
+    },
     "/table/{number}/unblock": {
       "parameters": [
         {
@@ -675,6 +717,48 @@
           },
           "404": {
             "description": "The table doesn't exist"
+          }
+        }
+      }
+    },
+    "/tables/unblock": {
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tables",
+            "description": "The tables' number to block",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tables": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "example": [
+                    57,
+                    78
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ],
+        "summary": "Unblocks the given tables",
+        "operationId": "postUnblockTables",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The tables are unblocked"
+          },
+          "400": {
+            "description": "One of the tables is not blocked"
           }
         }
       }
