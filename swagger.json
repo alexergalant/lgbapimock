@@ -584,21 +584,7 @@
             "name": "Action",
             "description": "The data",
             "schema": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "type": "string",
-                  "example": "2019-08-08T12:45:00+01:00"
-                },
-                "moment": {
-                  "type": "string",
-                  "example": "noon"
-                },
-                "serve_part": {
-                  "type": "integer",
-                  "example": 1
-                }
-              }
+              "$ref": "#/definitions/TableBlock"
             }
           }
         ],
@@ -631,19 +617,7 @@
             "name": "tables",
             "description": "The tables' number to block",
             "schema": {
-              "type": "object",
-              "properties": {
-                "tables": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer"
-                  },
-                  "example": [
-                    57,
-                    78
-                  ]
-                }
-              }
+              "$ref": "#/definitions/TablesBlock"
             }
           }
         ],
@@ -682,21 +656,7 @@
             "name": "Action",
             "description": "The data",
             "schema": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "type": "string",
-                  "example": "2019-08-08T12:45:00+01:00"
-                },
-                "moment": {
-                  "type": "string",
-                  "example": "noon"
-                },
-                "serve_part": {
-                  "type": "integer",
-                  "example": 1
-                }
-              }
+              "$ref": "#/definitions/TableBlock"
             }
           }
         ],
@@ -729,19 +689,7 @@
             "name": "tables",
             "description": "The tables' number to block",
             "schema": {
-              "type": "object",
-              "properties": {
-                "tables": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer"
-                  },
-                  "example": [
-                    57,
-                    78
-                  ]
-                }
-              }
+              "$ref": "#/definitions/TablesBlock"
             }
           }
         ],
@@ -1545,6 +1493,47 @@
               "example": false
             }
           }
+        }
+      }
+    },
+    "TableBlock": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "example": "2019-08-08T12:45:00+01:00"
+        },
+        "moment": {
+          "type": "string",
+          "example": "noon"
+        },
+        "serve_part": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    },
+    "TablesBlock": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "example": "2019-08-08T12:45:00+01:00"
+        },
+        "moment": {
+          "type": "string",
+          "example": "noon"
+        },
+        "serve_part": {
+          "type": "integer",
+          "example": "1,"
+        },
+        "tables": {
+          "type": "array,",
+          "example": [
+            406,
+            33
+          ]
         }
       }
     },
