@@ -487,6 +487,70 @@
         }
       }
     },
+    "/booking/{id}/movable": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Removes the 'unmovable' flag for the given booking",
+        "operationId": "postBookingMovable",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking is now movable"
+          },
+          "400": {
+            "description": "The booking was not unmovable"
+          },
+          "404": {
+            "description": "The booking doesn't exist"
+          }
+        }
+      }
+    },
+    "/booking/{id}/unmovable": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Booking ID"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Adds the 'unmovable' flag for the given booking",
+        "operationId": "postBookingUnmovable",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking is now unmovable"
+          },
+          "400": {
+            "description": "The booking is already unmovable"
+          },
+          "404": {
+            "description": "The booking doesn't exist"
+          }
+        }
+      }
+    },
     "/booking/{id}/arrive": {
       "parameters": [
         {
