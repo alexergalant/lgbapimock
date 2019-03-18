@@ -457,6 +457,10 @@
                     57,
                     78
                   ]
+                },
+                "initials": {
+                  "type": "string",
+                  "example": "JD"
                 }
               }
             }
