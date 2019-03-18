@@ -344,48 +344,6 @@
         }
       }
     },
-    "/booking/{id}/tables/free": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "type": "integer",
-          "required": true,
-          "description": "Booking ID"
-        }
-      ],
-      "post": {
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Initials",
-            "description": "The booking to create",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "initials": {
-                  "type": "string",
-                  "example": "jd"
-                }
-              }
-            }
-          }
-        ],
-        "tags": [
-          "Booking"
-        ],
-        "summary": "Free the tables of the booking with the given ID",
-        "operationId": "postBookingFreeTables",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "204": {
-            "description": "The booking's tables are free"
-          }
-        }
-      }
-    },
     "/booking/{id}/tables": {
       "parameters": [
         {
@@ -436,6 +394,37 @@
           },
           "404": {
             "description": "The booking doesn't exist"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Initials",
+            "description": "The booking to create",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "initials": {
+                  "type": "string",
+                  "example": "jd"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Free the tables of the booking with the given ID",
+        "operationId": "deleteBookingTables",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking's tables are free"
           }
         }
       }
