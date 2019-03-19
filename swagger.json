@@ -1637,10 +1637,13 @@
         },
         "serve_part": {
           "type": "integer",
-          "example": "1,"
+          "example": 1
         },
         "tables": {
-          "type": "array,",
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
           "example": [
             406,
             33
