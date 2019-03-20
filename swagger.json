@@ -1440,6 +1440,10 @@
           "type": "string",
           "example": "John Doe"
         },
+        "lastname": {
+          "type": "string",
+          "example": "Doe"
+        },
         "phone_number": {
           "type": "string",
           "example": "0102030405"
