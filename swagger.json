@@ -1802,6 +1802,10 @@
     "Bus": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "integer",
+          "example": 23
+        },
         "date": {
           "type": "string",
           "example": "2019-01-01T00:00:00+01:00"
