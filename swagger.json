@@ -910,6 +910,83 @@
           }
         }
       }
+    },
+    "/tables": {
+      "put": {
+        "tags": [
+          "Table"
+        ],
+        "summary": "Update tables position/rotation",
+        "operationId": "putUpdateTables",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Booking",
+            "description": "The updated booking details",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "integer",
+                    "example": 517
+                  },
+                  "position": {
+                    "type": "object",
+                    "properties": {
+                      "x": {
+                        "type": "integer",
+                        "example": 452
+                      },
+                      "y": {
+                        "type": "integer",
+                        "example": 75
+                      },
+                      "rotation": {
+                        "type": "integer",
+                        "example": -90
+                      }
+                    }
+                  },
+                  "template": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "new_number": {
+                    "type": "integer",
+                    "example": 33
+                  },
+                  "square": {
+                    "type": "integer",
+                    "example": 2
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking",
+            "schema": {
+              "$ref": "#/definitions/BookingDetails"
+            }
+          },
+          "400": {
+            "description": "Form Error",
+            "schema": {
+              "$ref": "#/definitions/FormError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
