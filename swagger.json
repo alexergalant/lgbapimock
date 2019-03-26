@@ -1041,6 +1041,97 @@
           }
         }
       }
+    },
+    "/bus/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "the bus booking ID"
+        }
+      ],
+      "put": {
+        "tags": [
+          "Bus"
+        ],
+        "summary": "Updates a given bus booking",
+        "operationId": "putBus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "bus booking",
+            "description": "The updated bus booking data",
+            "schema": {
+              "$ref": "#/definitions/Bus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bus booking updated",
+            "schema": {
+              "$ref": "#/definitions/Bus"
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "schema": {
+              "$ref": "#/definitions/FormError"
+            }
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Bus"
+        ],
+        "summary": "Cancels a given bus booking",
+        "operationId": "deleteBus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "initials",
+            "description": "Operator initials",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "initials": {
+                  "type": "string",
+                  "example": "JD"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Cancel successful"
+          },
+          "400": {
+            "description": "Missing parameter"
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        }
+      }
     }
   },
   "definitions": {
