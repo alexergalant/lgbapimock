@@ -173,6 +173,42 @@
         }
       }
     },
+    "/serving/{date}/{moment}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "date",
+          "type": "string",
+          "required": true,
+          "description": "Desired date"
+        },
+        {
+          "in": "path",
+          "name": "moment",
+          "type": "string",
+          "required": true,
+          "description": "Desired moment"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Serving"
+        ],
+        "summary": "Returns the serving that corresponds to the given date and moment",
+        "operationId": "getServing",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A serving moment and ID",
+            "schema": {
+              "$ref": "#/definitions/Serving"
+            }
+          }
+        }
+      }
+    },
     "/serving/{date}/{moment}/bookings": {
       "parameters": [
         {
