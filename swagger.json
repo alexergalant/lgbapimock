@@ -1088,6 +1088,30 @@
           "description": "the bus booking ID"
         }
       ],
+      "get": {
+        "tags": [
+          "Bus"
+        ],
+        "summary": "Restrieve a specific bus booking",
+        "operationId": "getSpecificBus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The bus booking info",
+            "schema": {
+              "$ref": "#/definitions/Bus"
+            }
+          },
+          "404": {
+            "description": "Bus booking not found"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Bus"
@@ -1999,6 +2023,16 @@
         "pax_assigned": {
           "type": "integer",
           "example": 54
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "example": [
+              32,
+              33
+            ]
+          }
         },
         "rooms": {
           "type": "array",
