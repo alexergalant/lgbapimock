@@ -619,6 +619,32 @@
         }
       }
     },
+    "/rooms": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "Get a list of rooms",
+        "operationId": "getRooms",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Rooms list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Room"
+              }
+            }
+          }
+        }
+      }
+    },
     "/room/{id}/{date}/{moment}": {
       "parameters": [
         {
@@ -1981,6 +2007,19 @@
         }
       }
     },
+    "Room": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Salle Clape"
+        }
+      }
+    },
     "Bus": {
       "type": "object",
       "properties": {
@@ -2037,17 +2076,7 @@
         "rooms": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "example": "Salle Clape"
-              }
-            }
+            "$ref": "#/definitions/Room"
           }
         }
       }
