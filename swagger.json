@@ -973,6 +973,54 @@
         }
       }
     },
+    "/booking/{id}/updateBookingTime": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "The booking's ID"
+        }
+      ],
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Action",
+            "description": "The data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "booking_time": {
+                  "type": "string",
+                  "example": "1970-01-01T12:15:00+01:00"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Updates the given booking's time",
+        "operationId": "postBookingUpdateBookingTime",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "The booking is updated"
+          },
+          "400": {
+            "description": "There is already a booking within 2h"
+          },
+          "404": {
+            "description": "The booking doesn't exist"
+          }
+        }
+      }
+    },
     "/tables": {
       "put": {
         "tags": [
